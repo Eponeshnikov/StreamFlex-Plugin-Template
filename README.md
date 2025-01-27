@@ -16,7 +16,7 @@ plugins/
 
 ### 1. Minimal Plugin Template (`plugin.py`)
 ```python
-from StreamFlex.plugin import Plugin
+from plugin import Plugin
 import streamlit as st
 
 class BaselinePlugin(Plugin):
@@ -37,7 +37,7 @@ class BaselinePlugin(Plugin):
 ### 2. Configuration (`configs/config.toml`)
 ```toml
 name = "Baseline Plugin"
-version = "1.0.0"
+version = "0.0.1"
 ```
 
 ## Widget Management
