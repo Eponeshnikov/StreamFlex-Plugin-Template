@@ -20,6 +20,10 @@ from plugin import Plugin
 import streamlit as st
 
 class BaselinePlugin(Plugin):
+    def __init__(self):
+        self.file = __file__ # Required if class name is different from directory name of plugin
+        super().__init__()
+    
     def run(self, data_manager, widget_manager):
         # Persistent widget example
         value = self.create_widget(
