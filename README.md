@@ -108,13 +108,47 @@ received_data = data_manager.get_data("shared_key", default=None)
 
 ---
 
+
 ## Execution & Deployment
 
-```bash
-# Install plugin dependencies
-pip install -r plugins/YourPlugin/requirements.txt
+### Installing Plugin Dependencies
 
-# Launch application
+Plugin dependencies are managed using the `pyproject.toml` file in the main project, organized into dependency groups. Each group corresponds to a plugin’s folder name, but it must be written in **lowercase**, with hyphens ("-") replaced by underscores ("_"). For example:
+
+- For a plugin in the folder `YourPlugin`, the group name is `yourplugin`.
+- For a plugin in the folder `Another-Plugin`, the group name is `another_plugin`.
+
+#### Installing Dependencies for an Existing Group
+
+To install dependencies for a specific plugin, use the `uv sync` command with the `--group` option, followed by the group name:
+
+```bash
+uv sync --group yourplugin
+```
+
+This command installs all dependencies listed under the `yourplugin` group in the `pyproject.toml` file.
+
+#### Creating a New Group for a Plugin
+
+If a group for your plugin doesn’t exist in `pyproject.toml`, you can create one by adding dependencies from the plugin’s `requirements.txt` file. Follow these steps:
+
+1. Ensure you are in the root directory of the project.
+2. Run the `uv add` command, specifying the group name and the path to the `requirements.txt` file:
+
+```bash
+uv add --group yourplugin --requirements plugins/YourPlugin/requirements.txt
+```
+
+- Replace `yourplugin` with the group name for your plugin (in lowercase, with "-" replaced by "_").
+- Ensure the path `plugins/YourPlugin/requirements.txt` matches the actual location of your plugin’s dependency file.
+
+This command adds the dependencies from `requirements.txt` to the `yourplugin` group in `pyproject.toml`.
+
+### Launching the Application
+
+Once the dependencies are installed, launch the application using Streamlit with the following command:
+
+```bash
 streamlit run app.py
 ```
 
